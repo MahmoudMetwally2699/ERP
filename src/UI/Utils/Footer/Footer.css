@@ -1,0 +1,64 @@
+footer {
+    color: gray;
+    background-color: #111111;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo{
+
+    width: 80px;
+    height:80px;
+    object-fit: contain;
+}
+.custom__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+}
+
+.custom__col a {
+    text-decoration: none;
+    color: gray;
+    padding-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+    font-size: 0.8rem;
+}
+
+.custom__col a:hover {
+    text-decoration: underline;
+    color: #ec6608;
+    transition: all 0.3s ease-in-out;
+}
+
+.socialMedia {
+    display: flex;
+
+}
+.socialMedia .custom__icon {
+   padding: 0 10px;
+   font-size: 20px;
+}
+
+.socialMedia .bi-facebook:hover {
+    cursor: pointer;
+    color: #3b5998;
+    transition: all 0.3s ease-in-out;
+}
+.socialMedia .bi-instagram:hover {
+    cursor: pointer;
+    color: #d62976;
+    transition: all 0.3s ease-in-out;
+}
+.socialMedia .bi-twitter:hover {
+    cursor: pointer;
+    color: #00acee;
+    transition: all 0.3s ease-in-out;
+}
+.copyRights{
+ padding: 10px 0 5px 5px;
+}
