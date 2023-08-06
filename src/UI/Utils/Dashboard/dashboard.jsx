@@ -139,7 +139,7 @@ const Dashboard = () => {
         />
         <span class="slider"></span>
       </label> */}
-      <div className="btn-switch">
+      {/* <div className="btn-switch">
         <input
           id="checkbox"
           className="input__check"
@@ -151,7 +151,16 @@ const Dashboard = () => {
           <i className="bi bi-arrows-move svg"></i>
           Move
         </label>
-      </div>
+      </div> */}
+      <label class="toggleSwitch nolabel" onclick="">
+        <input type="checkbox" checked={ isDraggable }
+          onChange={ handleToggleDrag } />
+        <a></a>
+        <span>
+          <span class="left-span">Disabled</span>
+          <span class="right-span">Enabled</span>
+        </span>
+      </label>
 
       <ResponsiveGridLayout
         className="layout"
@@ -171,8 +180,8 @@ const Dashboard = () => {
                 <h2>{box.title}</h2>
               </div>
               <p className="box-content">{box.content}</p>
-              <div className="dropdown-container">
-                <select className="dropdown">
+              <div className="dropdown1-container">
+                <select className="dropdown1">
                   {box.dropdownOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
