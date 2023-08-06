@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { Image } from "react-bootstrap";
 import Logo from "../../assets/imgs/Logo.png";
+import { login } from "../../features/login";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 const Login = () => {
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const loginHandler = () => {
     //handle login logic here
   };
@@ -16,17 +22,36 @@ const Login = () => {
           <Image src={Logo} alt="Logo" />
         </div>
         <p className="title">Login</p>
-        <Form>
+        <Form method="post">
           <Form.Group class="user-box">
-            <Form.Control required="username" name="username" type="email" />
-            <Form.Label>Email</Form.Label>
+            <Form.Control
+              required="username"
+              name="username"
+              type="text"
+              onChange={(event) => {
+                setUsername(event.target);
+              }}
+            />
+            <Form.Label>User Name</Form.Label>
           </Form.Group>
           <Form.Group class="user-box">
-            <Form.Control required="password" name="password" type="password" />
+            <Form.Control
+              required="password"
+              name="password"
+              type="password"
+              onChange={(event) => {
+                setPassword(event.target);
+              }}
+            />
             <Form.Label>Password</Form.Label>
           </Form.Group>
           <Button
-            onClick={loginHandler()}
+            onClick={() => {
+              const data = new FormData();
+              data.append("username", username);
+              data.append("password", password);
+              dispatch(login(data));
+            }}
             type="submit"
             className="btn-submit "
           >

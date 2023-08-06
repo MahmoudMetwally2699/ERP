@@ -8,7 +8,6 @@
   padding: 40px;
   margin: 20px auto;
   transform: translate(-50%, -55%);
-  background: rgba(0,0,0,.9);
   background-color: #111111;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
@@ -41,9 +40,10 @@
   color: #fff;
   margin-bottom: 30px;
   border: none;
+  background-color: #111111 !important;
   border-bottom: 1px solid #ec6608;
   outline: none;
-  background: transparent;
+  
 }
 
 .login-box .user-box label {
