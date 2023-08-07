@@ -1,15 +1,19 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { Image } from "react-bootstrap";
 import Logo from "../../assets/imgs/Logo.png";
 import { login } from "../../features/login";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import dataJson from "./data.json";
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.login.token);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const loginHandler = () => {
@@ -28,8 +32,9 @@ const Login = () => {
               required="username"
               name="username"
               type="text"
+              value={username}
               onChange={(event) => {
-                setUsername(event.target);
+                setUsername(event.target.value);
               }}
             />
             <Form.Label>User Name</Form.Label>
@@ -39,18 +44,24 @@ const Login = () => {
               required="password"
               name="password"
               type="password"
+              value={password}
               onChange={(event) => {
-                setPassword(event.target);
+                setPassword(event.target.value);
               }}
             />
             <Form.Label>Password</Form.Label>
           </Form.Group>
-          <Button
-            onClick={() => {
-              const data = new FormData();
-              data.append("username", username);
-              data.append("password", password);
-              dispatch(login(data));
+          <Link
+            onClick={(event) => {
+              event.preventDefault();
+              const formData = {
+                username,
+                password,
+              };
+              const jsonData = JSON.stringify(formData);
+              console.log(jsonData);
+              dispatch(login(jsonData));
+              navigate("/admin/dashboard");
             }}
             type="submit"
             className="btn-submit "
@@ -60,7 +71,7 @@ const Login = () => {
             <span></span>
             <span></span>
             Submit
-          </Button>
+          </Link>
         </Form>
         <p>
           Don't have an account?

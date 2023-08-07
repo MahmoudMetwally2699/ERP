@@ -153,8 +153,11 @@ const Dashboard = () => {
         </label>
       </div> */}
       <label class="toggleSwitch nolabel" onclick="">
-        <input type="checkbox" checked={ isDraggable }
-          onChange={ handleToggleDrag } />
+        <input
+          type="checkbox"
+          checked={isDraggable}
+          onChange={handleToggleDrag}
+        />
         <a></a>
         <span>
           <span class="left-span">Disabled</span>

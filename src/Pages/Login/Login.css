@@ -50,17 +50,17 @@
   position: absolute;
   top: 0;
   left: 0;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #fff;
-  pointer-events: none;
-  transition: .5s;
-outline: none;
+   font-size: 14px;
+    color: #b5b5b5;
+    pointer-events: none;
+    transition: .5s;
+    outline: none;
+    padding: 10px 10px;
 }
 
 .login-box .user-box input:focus ~ label,
 .login-box .user-box input:valid ~ label {
-  top: -20px;
+  top: -25px;
   left: 0;
   color: #fff;
   font-size: 12px;
@@ -197,7 +197,6 @@ outline: none;
     color: white;
     margin-bottom: 15px;
     transition: all 0.3s ease-in-out;
-    border-radius: 21px;
 
 }
 .btn-submit:hover{

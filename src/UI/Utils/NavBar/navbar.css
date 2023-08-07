@@ -7,7 +7,7 @@
     background: linear-gradient(to right, #111111, #111111);
    box-shadow: 1px 2px 3px #817f7f;
     padding: 5px 0;
-    border-radius: 0 0 24px 24px;
+
 }
 
 
@@ -31,11 +31,12 @@ button:not(:disabled) {
 .navbar-nav .nav-link {
     color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
-      border-radius: 10px;
+      border-radius: 15px;
+      padding: 4px 0;
 }
 
 .navbar-nav .nav-link:hover {
-    background-color: #F0883F;
+    background-color: #ec6608;
     transition: 0.3s ease-in-out;
     /* Semi-transparent background on hover */
     color: #f4f4f4;
@@ -73,7 +74,15 @@ button:not(:disabled) {
     border-color: white;
     color: white;
 }
-
+.custom__style{
+    border-color: #ff6a00;
+    border-radius: 20px;
+    background-color: #ec6608;
+}
+.custom__style:hover{
+     border-color: #f4f4f4;
+background-color: transparent;
+}
 
 /* Animation for dropdown menu */
 
@@ -100,7 +109,7 @@ button:not(:disabled) {
 /* Style for dropdown menu items */
 
 #profile-dropdown .dropdown-item {
-    color: #333;
+    color: #ffffff;
 }
 
 
@@ -138,6 +147,9 @@ button:not(:disabled) {
 
 .d-lg-inline-block {
     color: #ec6608;
+}
+.d-lg-inline-block:hover {
+    color: #ffffff;
 }
 
 

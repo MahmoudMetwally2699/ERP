@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 const url = "";
+const token = localStorage.getItem("token");
 //here get data from API
 const apiReports = createAsyncThunk("feature/apiReports", async () => {
   const response = await axios.get(url, { params: { token: "" } });

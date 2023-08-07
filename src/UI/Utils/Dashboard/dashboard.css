@@ -254,6 +254,7 @@
     border-radius: 5px;
     height: 34px;
     user-select: none;
+    margin:10px 20px;
 }
 
 .toggleSwitch * {
@@ -326,7 +327,7 @@
     padding: 0;
     left: 3px;
     width: 50%;
-    background-color: #666;
+    background-color: #111111;
     border-radius: 4px;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
@@ -358,8 +359,8 @@
     position: absolute;
     left: 0;
     top: -2px;
-    /* background-color: #fafafa;
-	border: 1px solid #ccc; */
+    /* background-color: #fafafa; */
+	/* border: 1px solid #ccc; */
     border-radius: 30px;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
@@ -378,6 +379,7 @@
 .toggleSwitch input:checked~span span:first-of-type {
     left: 0;
     color: #999;
+    
 }
 
 .toggleSwitch input:checked~span span:last-of-type {
@@ -405,6 +407,7 @@
 
 .toggleSwitch.large input:checked~a {
     left: 41px;
+   
 }
 
 .toggleSwitch.large>span span {
