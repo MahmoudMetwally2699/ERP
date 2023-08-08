@@ -5,9 +5,8 @@
 
 .navbar {
     background: linear-gradient(to right, #111111, #111111);
-   box-shadow: 1px 2px 3px #817f7f;
+    box-shadow: 1px 2px 3px #817f7f;
     padding: 5px 0;
-
 }
 
 
@@ -31,8 +30,8 @@ button:not(:disabled) {
 .navbar-nav .nav-link {
     color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
-      border-radius: 15px;
-      padding: 4px 0;
+    border-radius: 15px;
+    padding: 4px 0;
 }
 
 .navbar-nav .nav-link:hover {
@@ -58,31 +57,35 @@ button:not(:disabled) {
 .form-control {
     border: none;
     border-radius: 20px;
-   background-color: rgb(255, 255, 255) !important;
+    background-color: rgb(255, 255, 255) !important;
     color: white;
 }
 
 .form-control::placeholder {
     color: #ec6608;
 }
+
 .form-control:focus {
     color: #ec6608;
-  background-color: rgb(255, 255, 255) !important;
+    background-color: rgb(255, 255, 255) !important;
 }
 
 .btn-outline-success {
     border-color: white;
     color: white;
 }
-.custom__style{
+
+.custom__style {
     border-color: #ff6a00;
     border-radius: 20px;
     background-color: #ec6608;
 }
-.custom__style:hover{
-     border-color: #f4f4f4;
-background-color: transparent;
+
+.custom__style:hover {
+    border-color: #f4f4f4;
+    background-color: transparent;
 }
+
 
 /* Animation for dropdown menu */
 
@@ -148,6 +151,7 @@ background-color: transparent;
 .d-lg-inline-block {
     color: #ec6608;
 }
+
 .d-lg-inline-block:hover {
     color: #ffffff;
 }
@@ -159,4 +163,8 @@ b,
 strong {
     /* font-weight: bolder; */
     font-size: 12px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    color: white;
 }
