@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Preloader from "./preloader";
 import { Paper } from "@mui/material";
 import {
   BarChart,
@@ -73,7 +74,7 @@ const Dashboard = () => {
 
   if ( !dataLoaded )
   {
-    return <div>Loading...</div>;
+    return <Preloader />; // Render the Preloader component while data is loading
   }
 
 

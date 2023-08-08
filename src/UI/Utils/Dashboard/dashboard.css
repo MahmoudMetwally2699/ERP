@@ -254,7 +254,7 @@
     border-radius: 5px;
     height: 34px;
     user-select: none;
-    margin:10px 20px;
+    margin: 10px 20px;
 }
 
 .toggleSwitch * {
@@ -360,7 +360,7 @@
     left: 0;
     top: -2px;
     /* background-color: #fafafa; */
-	/* border: 1px solid #ccc; */
+    /* border: 1px solid #ccc; */
     border-radius: 30px;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
@@ -379,7 +379,6 @@
 .toggleSwitch input:checked~span span:first-of-type {
     left: 0;
     color: #999;
-    
 }
 
 .toggleSwitch input:checked~span span:last-of-type {
@@ -407,7 +406,6 @@
 
 .toggleSwitch.large input:checked~a {
     left: 41px;
-   
 }
 
 .toggleSwitch.large>span span {
@@ -444,147 +442,15 @@
     left: 50%;
 }
 
-
-/* .input__check {
-    padding-top: 10px !important;
-}
-
-#checkbox {
-    display: none;
-}
-
-.btn-switch {
-    padding: 10px 0 0 10px;
-    background-color: #f4f4f4;
-}
-
-.switch {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    background-color: rgb(236 102 8);
-    border-radius: 50%;
-    z-index: 1;
-    cursor: pointer;
+.preloader-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    font-size: 0.6em;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
-    border: 2px solid rgb(236 102 8) inset;
-    box-shadow: 0 0 10px #0000003f;
+    height: 100vh;
 }
 
-.svg {
-    position: relative;
-    width: 30%;
-    height: 30%;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.svg path {
-    fill: rgb(37, 37, 37);
-}
-
-#checkbox:checked+.switch .svg {
-    filter: drop-shadow(0px 0px 3px rgb(236 102 8));
-}
-
-#checkbox:checked+.switch .svg path {
-    fill: rgb(255, 255, 255);
-}
-
-#checkbox:checked+.switch {
-    box-shadow: 0px 0px 1px rgb(236 102 8) inset, 0px 0px 2px rgb(236 102 8) inset, 0px 0px 10px rgb(236 102 8) inset, 0px 0px 40px rgb(236 102 8), 0px 0px 100px rgb(236 102 8), 0px 0px 5px rgb(236 102 8);
-    border: 2px solid rgb(255, 255, 255);
-    background-color: rgb(236 102 8 / 68%);
-    color: rgb(255, 255, 255);
-} */
-
-
-/* Adjust the toggle's appearance */
-
-
-/* .react-toggle {
-    width: 60px;
-    height: 30px;
-} */
-
-
-/* Customize the knob */
-
-
-/* .react-toggle-thumb {
-    width: 28px;
-    height: 28px;
-} */
-
-
-/* Customize the background colors */
-
-
-/* .react-toggle-track {
-    background-color: #ddd;
-}
-
-.react-toggle-track-checked {
-    background-color: #4caf50;
-} */
-
-
-/* Adjust label styles */
-
-
-/* Adjust label styles */
-
-
-/* Customize the toggle label */
-
-
-/* .toggle-label {
-    margin-left: 10px;
-    user-select: none;
+.preloader-container p {
+    margin-top: 10px;
     font-size: 16px;
-    color: #333;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
-} */
-
-
-/* Add a hover effect */
-
-
-/* .toggle-label:hover {
-    color: #4caf50;
-    transform: scale(1.05);
-} */
-
-
-/* Add a checkmark icon to represent the checked state */
-
-
-/* .toggle-label::before {
-    content: '\2713';
-    display: inline-block;
-    margin-right: 6px;
-    font-size: 18px;
-    color: #4caf50;
-    opacity: 0;
-    transition: opacity 0.3s;
-} */
-
-
-/* Show the checkmark icon when the toggle is checked */
-
-
-/* input[type="checkbox"]:checked+.toggle-label::before {
-    opacity: 1;
-} */
+}
