@@ -27,10 +27,17 @@ import "react-resizable/css/styles.css";
 import "./dashboard.css";
 import "react-toggle/style.css"; // Import the CSS
 import Toggle from "react-toggle";
+import { apiReports } from "../../../features/reports";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Dashboard = () => {
+  const localToken = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.login.token);
+  const stringToken = `${token}`;
   const [isDraggable, setIsDraggable] = useState(true);
   const [profit, setProfit] = useState(0);
   const initialProfit = 500;
@@ -118,6 +125,8 @@ const Dashboard = () => {
     };
 
     requestAnimationFrame(incrementProfit);
+    console.log("token form localstorage=>", localToken);
+    dispatch(apiReports(localToken));
 
     return () => {
       // Clean up any resources if needed
@@ -126,32 +135,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {/* <div className="toggle-container">
-          <Toggle icons={false} />
-          <label className="toggle-label">{isDraggable ? "" : ""}</label>
-        </div> */}
-      {/* <label class="switch">
-        <input
-          type="checkbox"
-          checked={isDraggable}
-                  onChange={handleToggleDrag}
-                  className="checkbox"
-        />
-        <span class="slider"></span>
-      </label> */}
-      {/* <div className="btn-switch">
-        <input
-          id="checkbox"
-          className="input__check"
-          type="checkbox"
-          checked={isDraggable}
-          onChange={handleToggleDrag}
-        />
-        <label className="switch" for="checkbox">
-          <i className="bi bi-arrows-move svg"></i>
-          Move
-        </label>
-      </div> */}
       <label class="toggleSwitch nolabel" onclick="">
         <input
           type="checkbox"

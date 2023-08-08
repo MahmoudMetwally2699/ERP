@@ -61,7 +61,7 @@ const Login = () => {
               const jsonData = JSON.stringify(formData);
               console.log(jsonData);
               dispatch(login(jsonData));
-              navigate("/admin/dashboard");
+              // navigate("/admin/dashboard");
             }}
             type="submit"
             className="btn-submit "

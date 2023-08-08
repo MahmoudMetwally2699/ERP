@@ -1,12 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "";
-const token = localStorage.getItem("token");
 //here get data from API
-const apiReports = createAsyncThunk("feature/apiReports", async () => {
-  const response = await axios.get(url, { params: { token: "" } });
-  return response.data;
-});
+export const apiReports = createAsyncThunk(
+  "feature/apiReports",
+  async (token) => {
+    try {
+      const response = await axios.get(
+        "https://test.izocloud.com/api/rct/dashboard?token=" + token
+      );
+      if (response.status < 200 || response.status >= 300) {
+        // Handle non-2xx status codes as errors
+        throw new Error(response.data.message);
+      }
+      return response.data;
+    } catch (error) {
+      // Handle network errors or other exceptions
+      throw new Error("Failed get data. Please try again later.");
+    }
+  }
+);
 
 //here create a reducer
 const apiReportsSlice = createSlice({
