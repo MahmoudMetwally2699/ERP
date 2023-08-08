@@ -34,15 +34,56 @@ import { useSelector } from "react-redux";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Dashboard = () => {
+  useEffect(() => {
+    let currentProfit = 0;
+
+    const incrementProfit = () => {
+      if (currentProfit < initialProfit) {
+        const nextProfit = Math.min(
+          currentProfit + incrementAmount,
+          initialProfit
+        );
+        setProfit(nextProfit);
+        currentProfit = nextProfit;
+        requestAnimationFrame(incrementProfit);
+      }
+    };
+
+    requestAnimationFrame(incrementProfit);
+    console.log("token form localstorage=>", localToken);
+    //get data from api
+    dispatch(apiReports(localToken));
+    console.log("api data form dashboard", apiData);
+
+    return () => {
+      // Clean up any resources if needed
+    };
+  }, []);
+
   const localToken = localStorage.getItem("token");
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.login.token);
-  const stringToken = `${token}`;
+
+  //test api data
+  const apiData = useSelector((state) => state.apiReports.data);
+  const apiDataStatus = useSelector((state) => state.apiReports.status);
+
   const [isDraggable, setIsDraggable] = useState(true);
   const [profit, setProfit] = useState(0);
   const initialProfit = 500;
   const incrementAmount = 10;
   const animationDelay = 50;
+
+  //get keys from api reports
+  const keysApiReport = Object.keys(apiData.Report);
+  const SaleReportKeys = keysApiReport.slice(0, 3);
+  const DebitSaleReportKeys = keysApiReport.slice(3, 6);
+  const PurchaseReportKeys = keysApiReport.slice(6, 9);
+  const DebitPurchaseReportKeys = keysApiReport.slice(9, 12);
+  const ExpenseReportKeys = keysApiReport.slice(12, 15);
+  //use state for keys
+  const [sales, setSales] = useState(SaleReportKeys[0]);
+  const [DebitSale, setDebitSale] = useState(DebitSaleReportKeys[0]);
+  const [Purchas, setPurchas] = useState(PurchaseReportKeys[0]);
 
   const handleToggleDrag = () => {
     setIsDraggable(!isDraggable);
@@ -63,24 +104,33 @@ const Dashboard = () => {
   const boxes = [
     {
       id: "box1",
-      title: "Total Earnings",
-      content: `$${profit}`,
+      title: `Reports ${sales}`,
+      content: `$${apiData.Report[sales]}`,
       icon: faDollarSign,
-      dropdownOptions: ["Option 1", "Option 2", "Option 3"],
+      dropdownOptions: SaleReportKeys,
+      onclick: (event) => {
+        setSales(event.target.value);
+      },
     },
     {
       id: "box2",
-      title: "Profit",
-      content: `$${profit}`,
+      title: `Reports of ${DebitSale}`,
+      content: `$${apiData.Report[DebitSale]}`,
       icon: faChartBar,
-      dropdownOptions: ["Option A", "Option B", "Option C"],
+      dropdownOptions: DebitSaleReportKeys,
+      onclick: (event) => {
+        setDebitSale(event.target.value);
+      },
     },
     {
       id: "box3",
-      title: "Profits",
-      content: `$${profit}`,
+      title: `Reports of ${Purchas}`,
+      content: `$${apiData.Report[Purchas]}`,
       icon: faChartLine,
-      dropdownOptions: ["Option X", "Option Y", "Option Z"],
+      dropdownOptions: PurchaseReportKeys,
+      onclick: (event) => {
+        setPurchas(event.target.value);
+      },
     },
   ];
 
@@ -108,30 +158,6 @@ const Dashboard = () => {
   ];
 
   const COLORS = ["#19a979", "#fc636b", "#fdbc40", "#537780"];
-
-  useEffect(() => {
-    let currentProfit = 0;
-
-    const incrementProfit = () => {
-      if (currentProfit < initialProfit) {
-        const nextProfit = Math.min(
-          currentProfit + incrementAmount,
-          initialProfit
-        );
-        setProfit(nextProfit);
-        currentProfit = nextProfit;
-        requestAnimationFrame(incrementProfit);
-      }
-    };
-
-    requestAnimationFrame(incrementProfit);
-    console.log("token form localstorage=>", localToken);
-    dispatch(apiReports(localToken));
-
-    return () => {
-      // Clean up any resources if needed
-    };
-  }, []);
 
   return (
     <div className="dashboard-container">
@@ -167,7 +193,12 @@ const Dashboard = () => {
               </div>
               <p className="box-content">{box.content}</p>
               <div className="dropdown1-container">
-                <select className="dropdown1">
+                <select
+                  className="dropdown1"
+                  onClick={(event) => {
+                    box.onclick(event);
+                  }}
+                >
                   {box.dropdownOptions.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
