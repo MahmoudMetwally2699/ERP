@@ -34,29 +34,24 @@ import { useSelector } from "react-redux";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Dashboard = () => {
-  const [ dataLoaded, setDataLoaded ] = useState( false );
-  const localToken = localStorage.getItem( "token" );
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const localToken = localStorage.getItem("token");
   const dispatch = useDispatch();
 
-  useEffect( () =>
-  {
-
-    const fetchData = async () =>
-    {
+  useEffect(() => {
+    const fetchData = async () => {
       // Fetch data from API
-      try
-      {
-        const response = await dispatch( apiReports( localToken ) );
-        console.log( "api data from dashboard", response.payload );
-        setDataLoaded( true ); // Mark data as loaded
-      } catch ( error )
-      {
-        console.error( "Error fetching data:", error );
+      try {
+        const response = await dispatch(apiReports(localToken));
+        console.log("api data from dashboard", response.payload);
+        setDataLoaded(true); // Mark data as loaded
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [] );
+  }, []);
   const apiData = useSelector((state) => state.apiReports.data);
   const apiDataStatus = useSelector((state) => state.apiReports.status);
 
@@ -67,28 +62,22 @@ const Dashboard = () => {
   const animationDelay = 50;
 
   // get keys from api reports
-  const [ sales, setSales ] = useState( "DailySale" );
-  const [ DebitSale, setDebitSale ] = useState( "DailyDebitSale" );
-  const [ Purchas, setPurchas ] = useState( "DailyPurchase" );
+  const [sales, setSales] = useState("DailySale");
+  const [DebitSale, setDebitSale] = useState("DailyDebitSale");
+  const [Purchas, setPurchas] = useState("DailyPurchase");
 
-  if ( !dataLoaded )
-  {
+  if (!dataLoaded) {
     return <div>Loading...</div>;
   }
 
-
-
-
   //test api data
-  const keysApiReport = Object.keys( apiData.Report );
+  const keysApiReport = Object.keys(apiData.Report);
   const SaleReportKeys = keysApiReport.slice(0, 3);
   const DebitSaleReportKeys = keysApiReport.slice(3, 6);
   const PurchaseReportKeys = keysApiReport.slice(6, 9);
   const DebitPurchaseReportKeys = keysApiReport.slice(9, 12);
   const ExpenseReportKeys = keysApiReport.slice(12, 15);
   //use state for keys
-
-
 
   const handleToggleDrag = () => {
     setIsDraggable(!isDraggable);
@@ -139,28 +128,31 @@ const Dashboard = () => {
     },
   ];
 
-  const barChartData = [
-    { name: "Jan", value: 12 },
-    { name: "Feb", value: 19 },
-    { name: "Mar", value: 3 },
-    { name: "Apr", value: 5 },
-    { name: "May", value: 2 },
-  ];
+  let trimObjects = (object, start = 0, end = Object.keys(object).length) => {
+    let UIArray = [];
+    let realData = Object.keys(object);
+    realData = realData.slice(start, end);
+    for (let i = 0; i < realData.length; i++) {
+      let data = { name: realData[i], value: object[realData[i]] };
 
-  const lineChartData = [
-    { name: "Jan", value: 65 },
-    { name: "Feb", value: 59 },
-    { name: "Mar", value: 80 },
-    { name: "Apr", value: 81 },
-    { name: "May", value: 56 },
-  ];
+      UIArray.push(data);
+    }
+    return UIArray;
+  };
+  //get protit data from api
+  const apiprofit = apiData.Profit;
+  const reportDataApi = apiData.Report;
+  const profitUiArray = trimObjects(apiprofit);
+  const DebitPurchaseUiArray = trimObjects(reportDataApi, 9, 12);
+  const ExpenseUiArray = trimObjects(reportDataApi, 12, 16);
+  console.log("temp data ", profitUiArray);
+  console.log("DebitPurchaseUiArray ", DebitPurchaseUiArray);
+  console.log("ExpenseUiArray ", ExpenseUiArray);
+  const barChartData = ExpenseUiArray;
 
-  const pieChartData = [
-    { name: "Category 1", value: 400 },
-    { name: "Category 2", value: 300 },
-    { name: "Category 3", value: 200 },
-    { name: "Category 4", value: 100 },
-  ];
+  const lineChartData = DebitPurchaseUiArray;
+
+  const pieChartData = profitUiArray;
 
   const COLORS = ["#19a979", "#fc636b", "#fdbc40", "#537780"];
 
