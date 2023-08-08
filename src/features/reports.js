@@ -31,6 +31,7 @@ const apiReportsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(apiReports.fulfilled, (state, { payload }) => {
       state.data = payload;
+      console.log( "no" + payload );
       state.status = "success";
     });
     builder.addCase(apiReports.pending, (state) => {

@@ -34,36 +34,29 @@ import { useSelector } from "react-redux";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Dashboard = () => {
-  useEffect(() => {
-    let currentProfit = 0;
+  const [ dataLoaded, setDataLoaded ] = useState( false );
+  const localToken = localStorage.getItem( "token" );
+  const dispatch = useDispatch();
 
-    const incrementProfit = () => {
-      if (currentProfit < initialProfit) {
-        const nextProfit = Math.min(
-          currentProfit + incrementAmount,
-          initialProfit
-        );
-        setProfit(nextProfit);
-        currentProfit = nextProfit;
-        requestAnimationFrame(incrementProfit);
+  useEffect( () =>
+  {
+
+    const fetchData = async () =>
+    {
+      // Fetch data from API
+      try
+      {
+        const response = await dispatch( apiReports( localToken ) );
+        console.log( "api data from dashboard", response.payload );
+        setDataLoaded( true ); // Mark data as loaded
+      } catch ( error )
+      {
+        console.error( "Error fetching data:", error );
       }
     };
 
-    requestAnimationFrame(incrementProfit);
-    console.log("token form localstorage=>", localToken);
-    //get data from api
-    dispatch(apiReports(localToken));
-    console.log("api data form dashboard", apiData);
-
-    return () => {
-      // Clean up any resources if needed
-    };
-  }, []);
-
-  const localToken = localStorage.getItem("token");
-  const dispatch = useDispatch();
-
-  //test api data
+    fetchData();
+  }, [] );
   const apiData = useSelector((state) => state.apiReports.data);
   const apiDataStatus = useSelector((state) => state.apiReports.status);
 
@@ -73,17 +66,29 @@ const Dashboard = () => {
   const incrementAmount = 10;
   const animationDelay = 50;
 
-  //get keys from api reports
-  const keysApiReport = Object.keys(apiData.Report);
+  // get keys from api reports
+  const [ sales, setSales ] = useState( "DailySale" );
+  const [ DebitSale, setDebitSale ] = useState( "DailyDebitSale" );
+  const [ Purchas, setPurchas ] = useState( "DailyPurchase" );
+
+  if ( !dataLoaded )
+  {
+    return <div>Loading...</div>;
+  }
+
+
+
+
+  //test api data
+  const keysApiReport = Object.keys( apiData.Report );
   const SaleReportKeys = keysApiReport.slice(0, 3);
   const DebitSaleReportKeys = keysApiReport.slice(3, 6);
   const PurchaseReportKeys = keysApiReport.slice(6, 9);
   const DebitPurchaseReportKeys = keysApiReport.slice(9, 12);
   const ExpenseReportKeys = keysApiReport.slice(12, 15);
   //use state for keys
-  const [sales, setSales] = useState(SaleReportKeys[0]);
-  const [DebitSale, setDebitSale] = useState(DebitSaleReportKeys[0]);
-  const [Purchas, setPurchas] = useState(PurchaseReportKeys[0]);
+
+
 
   const handleToggleDrag = () => {
     setIsDraggable(!isDraggable);
