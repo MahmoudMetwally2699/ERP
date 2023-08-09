@@ -35,18 +35,19 @@ import { useSelector } from "react-redux";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Dashboard = () => {
-  const [dataLoaded, setDataLoaded] = useState(false);
-  const localToken = localStorage.getItem("token");
+  const [ dataLoaded, setDataLoaded ] = useState( false );
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       // Fetch data from API
       try {
+        const localToken = localStorage.getItem( "token" );
         const response = await dispatch(apiReports(localToken));
         console.log("api data from dashboard", response.payload);
         setDataLoaded(true); // Mark data as loaded
       } catch (error) {
+        localStorage.removeItem( "token" );
         console.error("Error fetching data:", error);
       }
     };
@@ -67,8 +68,19 @@ const Dashboard = () => {
   const [DebitSale, setDebitSale] = useState("DailyDebitSale");
   const [Purchas, setPurchas] = useState("DailyPurchase");
 
+  if ( !dataLoaded || apiDataStatus === "pending" )
+  {
+    return <Preloader />;
+  }
+
+  if ( apiDataStatus === "rejected" || !apiData )
+  {
+    localStorage.removeItem( "token" );
+    window.location.href = "/";
+  }
+
   if (!dataLoaded) {
-    return <div>Loading...</div>;
+    return <Preloader />;
   }
 
   //test api data
@@ -100,7 +112,7 @@ const Dashboard = () => {
     {
       id: "box1",
       title: `Reports ${sales}`,
-      content: `$${apiData.Report[sales]}`,
+      content: `AED ${ apiData.Report[ sales ] === null ? "0" : apiData.Report[ sales ] }`,
       icon: faDollarSign,
       dropdownOptions: SaleReportKeys,
       onclick: (event) => {
@@ -108,9 +120,10 @@ const Dashboard = () => {
       },
     },
     {
+
       id: "box2",
       title: `Reports of ${DebitSale}`,
-      content: `$${apiData.Report[DebitSale]}`,
+      content: `AED ${ apiData.Report[ DebitSale ] === null ? "0" : apiData.Report[ DebitSale ] }`,
       icon: faChartBar,
       dropdownOptions: DebitSaleReportKeys,
       onclick: (event) => {
@@ -120,7 +133,7 @@ const Dashboard = () => {
     {
       id: "box3",
       title: `Reports of ${Purchas}`,
-      content: `$${apiData.Report[Purchas]}`,
+      content: `AED ${ apiData.Report[ Purchas ] === null ? "0" : apiData.Report[ Purchas ] }`,
       icon: faChartLine,
       dropdownOptions: PurchaseReportKeys,
       onclick: (event) => {
@@ -212,7 +225,7 @@ const Dashboard = () => {
           <Paper className="box chart-box">
             <h2 className="chart-title">Bar Chart</h2>
             <div className="chart-content">
-              <BarChart width={500} height={300} data={barChartData}>
+              <BarChart width={ 550 } height={ 300 } data={ barChartData }>
                 <XAxis dataKey="name" />
                 <YAxis />
                 <CartesianGrid strokeDasharray="3 3" />

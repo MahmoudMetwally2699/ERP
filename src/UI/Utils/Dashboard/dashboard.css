@@ -130,6 +130,7 @@
 
 .dropdown1:hover {
     background-color: #e0e0e0;
+    color: #ec6608
 }
 
 
@@ -453,4 +454,21 @@
 .preloader-container p {
     margin-top: 10px;
     font-size: 16px;
+}
+
+#profile-dropdown .dropdown-item {
+    color: #ec6608 !important;
+}
+
+.css-1szo49z-MuiCircularProgress-root {
+    color: orangered !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+    font-size: 12px;
+    /* Adjust the font size as needed */
+}
+
+.d-lg-inline-block {
+    color: #e6e9ef !important;
 }

@@ -24,6 +24,10 @@ import logoImage from "../../../assets/imgs/Logo.png"; // Replace with the actua
 import profileImage from "../../../assets/imgs/Logo.png"; // Replace with the actual path to your profile image
 
 function NavBar() {
+  function clearTokenFromLocalStorage ()
+  {
+    localStorage.removeItem( "token" ); // Replace "authToken" with the actual name of your token key
+  }
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -256,7 +260,7 @@ function NavBar() {
             >
               <NavDropdown.Item href="#dashboard">Dashboard</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
+              <NavDropdown.Item href="/" onClick={ clearTokenFromLocalStorage }>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
